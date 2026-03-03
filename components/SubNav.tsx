@@ -1,6 +1,6 @@
 export default function SubNav() {
   return (
-    <nav className="flex justify-between px-8 py-4 items-center border-b border-gray-400 bg-white shadow-md">
+    <nav className="flex justify-between px-10 py-4 items-center border-b border-gray-400 bg-white shadow-md">
       <div className="flex gap-10">
         <p className="text-lg group relative w-max cursor-pointer hover:text-blue-500">
           <span>Popular</span>
