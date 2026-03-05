@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/AddToCartButton";
 import { getProductById } from "@/lib/api";
 import Image from "next/image";
 
@@ -41,6 +42,7 @@ export default async function ProductPage({ params }: Props) {
           )}
 
           <p className="text-sm text-gray-500">Rating: {product.rating} / 5</p>
+          <AddToCartButton product={product} />
         </div>
       </div>
 
