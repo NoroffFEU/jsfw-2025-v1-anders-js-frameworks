@@ -3,32 +3,16 @@
 import { useCart } from "@/context/CartContext";
 import Logo from "@/public/Logo.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const { openCart, totalItems } = useCart();
 
   return (
     <nav className="flex justify-between px-10 py-4 items-center border-b-2 border-blue-400 sticky top-0 z-10 bg-white shadow-md">
-      <div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-8 cursor-pointer"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
-      </div>
-
-      <div>
+      <Link href="/">
         <Image className="w-60 cursor-pointer" src={Logo} alt="Logo for Snapbuy" />
-      </div>
+      </Link>
 
       <div className="flex items-center gap-4">
         {/* Cart icon */}

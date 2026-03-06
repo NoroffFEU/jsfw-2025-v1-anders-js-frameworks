@@ -2,6 +2,7 @@
 
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CartDrawer() {
   const { items, removeFromCart, clearCart, totalItems, isOpen, closeCart } =
@@ -10,20 +11,17 @@ export default function CartDrawer() {
   const total = items.reduce(
     (sum, { product, quantity }) =>
       sum + (product.discountedPrice ?? product.price) * quantity,
-    0
+    0,
   );
 
   return (
     <>
       {/* Overlay */}
       {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-40"
-          onClick={closeCart}
-        />
+        <div className="fixed inset-0 bg-black/40 z-40" onClick={closeCart} />
       )}
 
-      {/* Drawer */}
+      {/* side meny */}
       <div
         className={`fixed top-0 right-0 h-full w-96 bg-white z-50 shadow-2xl flex flex-col transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -48,7 +46,7 @@ export default function CartDrawer() {
             <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-4">
               {items.map(({ product, quantity }) => (
                 <div key={product.id} className="flex items-center gap-4">
-                  <div className="relative w-16 h-16 flex-shrink-0">
+                  <div className="relative w-16 h-16 shrink-0">
                     <Image
                       src={product.image.url}
                       alt={product.image.alt}
@@ -77,9 +75,13 @@ export default function CartDrawer() {
                 <p className="font-semibold">Total</p>
                 <p className="font-bold">{total.toFixed(2)} kr</p>
               </div>
-              <button className="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-blue-600 transition-colors mb-2 cursor-pointer">
-                Checkout
-              </button>
+              <Link
+                href="/cart"
+                onClick={closeCart}
+                className="block w-full bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-blue-600 transition-colors mb-2 text-center"
+              >
+                View cart & checkout
+              </Link>
               <button
                 onClick={clearCart}
                 className="w-full text-sm text-gray-400 hover:text-gray-600 cursor-pointer"

@@ -42,6 +42,20 @@ export default async function ProductPage({ params }: Props) {
           )}
 
           <p className="text-sm text-gray-500">Rating: {product.rating} / 5</p>
+
+          {product.tags && product.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {product.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-blue-100 text-blue-600 text-xs font-medium px-3 py-1 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
           <AddToCartButton product={product} />
         </div>
       </div>
