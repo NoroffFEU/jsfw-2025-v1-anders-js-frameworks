@@ -25,7 +25,7 @@ export default function AllProducts({ products }: AllProductsProps) {
             href={`/products/${product.id}`}
             className="border-2 border-blue-500 p-4 rounded-xl shadow-lg block"
           >
-            <div className="relative h-48">
+            <div className="relative aspect-4/3">
               <Image
                 src={product.image.url}
                 alt={product.image.alt}

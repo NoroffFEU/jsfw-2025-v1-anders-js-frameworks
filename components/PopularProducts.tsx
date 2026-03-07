@@ -21,7 +21,7 @@ export default function PopularProducts({ products }: PopularProductsProps) {
             href={`/products/${product.id}`}
             className="border-2 border-blue-500 rounded-xl p-4 shadow-lg flex flex-col"
           >
-            <div className="relative h-48">
+            <div className="relative aspect-4/3">
               <Image
                 src={product.image.url}
                 alt={product.image.alt}
@@ -29,7 +29,7 @@ export default function PopularProducts({ products }: PopularProductsProps) {
                 className="object-cover rounded-lg"
               />
             </div>
-            <div className="pt-10">
+            <div className="pt-3">
               <h3 className="mt-3 font-semibold text-xl">{product.title}</h3>
               <p className="text-sm text-gray-500">
                 Rating: {product.rating} / 5

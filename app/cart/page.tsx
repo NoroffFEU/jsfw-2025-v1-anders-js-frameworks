@@ -13,7 +13,7 @@ export default function CartPage() {
   const total = items.reduce(
     (sum, { product, quantity }) =>
       sum + (product.discountedPrice ?? product.price) * quantity,
-    0
+    0,
   );
 
   const handleCheckout = () => {
@@ -49,7 +49,7 @@ export default function CartPage() {
               key={product.id}
               className="flex items-center gap-6 border rounded-xl p-4 shadow-sm"
             >
-              <div className="relative w-24 h-24 flex-shrink-0">
+              <div className="relative w-24 h-24 shrink-0">
                 <Image
                   src={product.image.url}
                   alt={product.image.alt}
@@ -70,7 +70,9 @@ export default function CartPage() {
                 >
                   −
                 </button>
-                <span className="w-6 text-center font-semibold">{quantity}</span>
+                <span className="w-6 text-center font-semibold">
+                  {quantity}
+                </span>
                 <button
                   onClick={() => updateQuantity(product.id, quantity + 1)}
                   className="w-8 h-8 rounded-full border-2 border-blue-500 text-blue-500 font-bold hover:bg-blue-50 cursor-pointer"

@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/types/product";
-import { createContext, useContext, useSyncExternalStore, useState } from "react";
+import { createContext, useContext, useSyncExternalStore, useState, useCallback } from "react";
 
 export interface CartItem {
   product: Product;
@@ -18,6 +18,7 @@ interface CartContextType {
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
+  toastMessage: string | null;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -51,6 +52,12 @@ function subscribeToCart(callback: () => void) {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const items = useSyncExternalStore(subscribeToCart, readCart, () => EMPTY);
   const [isOpen, setIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = useCallback((message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 2500);
+  }, []);
 
   const addToCart = (product: Product) => {
     const current = readCart();
@@ -66,10 +73,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } else {
       writeCart([...current, { product, quantity: 1 }]);
     }
+    showToast("Added to cart!");
   };
 
   const removeFromCart = (productId: string) => {
     writeCart(readCart().filter((item) => item.product.id !== productId));
+    showToast("Item removed");
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
@@ -100,6 +109,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         isOpen,
         openCart: () => setIsOpen(true),
         closeCart: () => setIsOpen(false),
+        toastMessage,
       }}
     >
       {children}

@@ -58,7 +58,7 @@ export default function Header({ products }: HeaderProps) {
                 <Link
                   key={product.id}
                   href={`/products/${product.id}`}
-                  className="relative min-w-full h-150 block"
+                  className="relative min-w-full aspect-video block"
                 >
                   <Image
                     src={product.image.url}
@@ -115,7 +115,7 @@ export default function Header({ products }: HeaderProps) {
       </div>
 
       {/* HØYRE – To produkter */}
-      <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-6 lg:h-full">
         {sideProducts.map((product) => {
           const isDisc =
             product.discountedPrice != null &&
@@ -130,9 +130,9 @@ export default function Header({ products }: HeaderProps) {
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              className="border-2 border-blue-500 rounded-xl p-4 shadow-lg block"
+              className="border-2 border-blue-500 rounded-xl p-4 shadow-lg block lg:flex lg:flex-col"
             >
-              <div className="relative h-49">
+              <div className="relative aspect-4/3 lg:aspect-auto lg:flex-1 lg:min-h-0">
                 <Image
                   src={product.image.url}
                   alt={product.image.alt}
